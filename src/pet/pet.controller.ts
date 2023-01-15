@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
+  NotFoundException,
 } from '@nestjs/common';
 import { PetService } from './pet.service';
 import { CreatePetDto } from './dto/create-pet.dto';
@@ -27,12 +30,21 @@ export class PetController {
 
   @Get('user/:uuid')
   findByUser(@Param('uuid') uuid: string) {
-    return this.petService.findByUser(uuid);
+    try {
+      return this.petService.findByUser(uuid);
+    } catch {
+      throw new HttpException('Bad request', HttpStatus.NOT_FOUND);
+    }
   }
 
   @Get(':uuid')
-  findOne(@Param('uuid') uuid: string) {
-    return this.petService.findOne(uuid);
+  async findOne(@Param('uuid') uuid: string) {
+    try {
+      const result = await this.petService.findOne(uuid);
+      return result;
+    } catch {
+      throw new NotFoundException();
+    }
   }
 
   @Patch(':uuid')
