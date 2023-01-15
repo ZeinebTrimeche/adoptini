@@ -26,17 +26,17 @@ export class PetController {
   }
 
   @Get(':uuid')
-  findOne(@Param('uuid') id: string) {
-    return this.petService.findOne(id);
+  findOne(@Param('uuid') uuid: string) {
+    return this.petService.findOne(uuid);
   }
 
   @Patch(':uuid')
-  update(@Param('uuid') id: string, @Body() updatePetDto: UpdatePetDto) {
-    return this.petService.update(id, updatePetDto);
+  update(@Param('uuid') uuid: string, @Body() updatePetDto: UpdatePetDto) {
+    return this.petService.update(uuid, updatePetDto);
   }
 
   @Delete(':uuid')
-  remove(@Param('uuid') id: string) {
-    return this.petService.remove(id);
+  remove(@Param('uuid') uuid: string) {
+    return this.petService.remove(uuid);
   }
 }
