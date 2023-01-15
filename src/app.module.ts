@@ -3,6 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './user/user.module';
+import { PetModule } from './pet/pet.module';
+import { User } from './user/entities/user.entity';
+import { Pet } from './pet/entities/pet.entity';
 
 @Module({
   imports: [
@@ -14,9 +18,11 @@ import { AppService } from './app.service';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [],
+      entities: [User, Pet],
       synchronize: true,
     }),
+    UserModule,
+    PetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
