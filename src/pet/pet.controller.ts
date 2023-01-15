@@ -25,6 +25,11 @@ export class PetController {
     return this.petService.findAll();
   }
 
+  @Get('user/:uuid')
+  findByUser(@Param('uuid') uuid: string) {
+    return this.petService.findByUser(uuid);
+  }
+
   @Get(':uuid')
   findOne(@Param('uuid') uuid: string) {
     return this.petService.findOne(uuid);

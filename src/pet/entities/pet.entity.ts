@@ -5,7 +5,8 @@ import {
   IsUrl,
   MinLength,
 } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Pet {
@@ -25,10 +26,10 @@ export class Pet {
   @IsUrl()
   public pictureUrl?: string;
 
-  @Column()
-  public ownerUuid?: string;
+  @ManyToOne(() => User, (user) => user.adoptedPets)
+  public owner?: User;
 
   @Column()
   @IsBoolean()
-  public markedForAdoption = false;
+  public markedForAdoption?: boolean;
 }

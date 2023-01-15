@@ -23,6 +23,10 @@ export class PetService {
     return this.petRepo.findOneByOrFail({ uuid });
   }
 
+  findByUser(uuid: string) {
+    return this.petRepo.find({ where: { owner: { uuid } } });
+  }
+
   update(uuid: string, updatePetDto: UpdatePetDto) {
     return this.petRepo.update({ uuid }, updatePetDto);
   }

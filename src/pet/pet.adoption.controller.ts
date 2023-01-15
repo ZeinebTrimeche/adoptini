@@ -24,14 +24,14 @@ export class PetAdoptionContoller {
   }
 
   findOne(@Param('id') id: string) {
-    return this.petService.findOne(+id);
+    return this.petService.findOne(id);
   }
 
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
-    return this.petService.update(+id, updatePetDto);
+    return this.petService.update(id, updatePetDto);
   }
 
   remove(@Param('id') id: string) {
-    return this.petService.remove(+id);
+    return this.petService.remove(id);
   }
 }

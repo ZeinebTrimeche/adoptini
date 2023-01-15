@@ -38,6 +38,6 @@ export class User {
   @IsUrl()
   public pictureUrl?: string;
 
-  @OneToMany(() => Pet, (pet) => pet.ownerUuid)
+  @OneToMany(() => Pet, (pet) => pet.owner)
   public adoptedPets?: Pet[];
 }
