@@ -15,7 +15,7 @@ export class UserService {
   }
 
   findAll() {
-    return this.usersRepository.find({ relations: ['pets'] });
+    return this.usersRepository.find({ relations: ['adoptedPets'] });
   }
 
   findOne(id: string) {
