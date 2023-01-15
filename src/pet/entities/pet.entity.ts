@@ -1,19 +1,13 @@
 import {
   IsBoolean,
   IsDateString,
-  IsEmpty,
   IsString,
   IsUrl,
+  MaxLength,
   MinLength,
 } from 'class-validator';
 import { User } from 'src/user/entities/user.entity';
-import {
-  Column,
-  Entity,
-  IsNull,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Pet {
@@ -22,6 +16,7 @@ export class Pet {
 
   @Column()
   @IsString()
+  @MaxLength(15)
   @MinLength(3)
   public name: string;
 

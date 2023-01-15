@@ -15,22 +15,24 @@ export class UserService {
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.usersRepository.find({ relations: ['pets'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    return this.usersRepository.findOneByOrFail({
+      uuid: id,
+    });
   }
 
   findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(id: string, updateUserDto: UpdateUserDto) {
+    return this.usersRepository.update({ uuid: id }, updateUserDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: string) {
+    return this.usersRepository.delete(id);
   }
 }

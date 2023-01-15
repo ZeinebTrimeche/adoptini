@@ -2,7 +2,7 @@ import {
   IsDateString,
   IsEmail,
   IsString,
-  IsUrl,
+  MaxLength,
   MinLength,
 } from 'class-validator';
 import { Pet } from 'src/pet/entities/pet.entity';
@@ -23,11 +23,13 @@ export class User {
   @Column()
   @IsString()
   @MinLength(2)
+  @MaxLength(15)
   public firstName: string;
 
   @Column()
   @IsString()
   @MinLength(2)
+  @MaxLength(15)
   public lastName: string;
 
   @Column()
@@ -37,6 +39,6 @@ export class User {
   @Column({ nullable: true })
   public pictureUrl?: string;
 
-  @OneToMany(() => Pet, (pet) => pet.owner)
+  @OneToMany(() => Pet, (pet) => pet.owner, { cascade: true })
   public adoptedPets?: Pet[];
 }
