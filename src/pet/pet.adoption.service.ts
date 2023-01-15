@@ -24,7 +24,6 @@ export class PetAdoptionSercice {
       where: { email: userEmail },
     });
     pet.owner = user;
-    console.log(user);
 
     return this.petRepo.save(pet);
   }
