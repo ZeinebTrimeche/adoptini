@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
 import { User } from './user/entities/user.entity';
 import { Pet } from './pet/entities/pet.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { Pet } from './pet/entities/pet.entity';
     }),
     UserModule,
     PetModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
