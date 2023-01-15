@@ -1,1 +1,4 @@
-export class CreatePetDto {}
+import { OmitType } from '@nestjs/mapped-types';
+import { Pet } from '../entities/pet.entity';
+
+export class CreatePetDto extends OmitType(Pet, ['uuid'] as const) {}
