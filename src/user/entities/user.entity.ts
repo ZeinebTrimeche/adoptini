@@ -1,23 +1,27 @@
 import { Pet } from 'src/pet/entities/pet.entity';
-import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
+  @Column({ unique: true })
   public email: string;
 
+  @Column()
   public hashedPassword: string;
 
-  public salt: string;
-
+  @Column()
   public firstName: string;
 
+  @Column()
   public lastName: string;
 
+  @Column()
   public birthDate: Date;
 
+  @Column()
   public pictureUrl: string;
 
   // public ownedPets: string[];
