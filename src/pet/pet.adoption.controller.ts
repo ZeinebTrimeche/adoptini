@@ -1,37 +1,23 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { PetService } from './pet.service';
-import { CreatePetDto } from './dto/create-pet.dto';
-import { UpdatePetDto } from './dto/update-pet.dto';
+import { PetAdoptionSercice } from './pet.adoption.service';
+import { Controller, Body, Post } from '@nestjs/common';
 
 @Controller('pet/adoption')
 export class PetAdoptionContoller {
-  constructor(private readonly petService: PetService) {}
+  constructor(private readonly petAdoptionSercice: PetAdoptionSercice) {}
 
-  create(@Body() createPetDto: CreatePetDto) {
-    return this.petService.create(createPetDto);
+  @Post()
+  create(@Body() createAdoption: { userEmail: string; petId: string }) {
+    return this.petAdoptionSercice.create(
+      createAdoption.petId,
+      createAdoption.userEmail,
+    );
   }
 
-  findAll() {
-    return this.petService.findAll();
-  }
+  // update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
+  //   return this.petService.update(id, updatePetDto);
+  // }
 
-  findOne(@Param('id') id: string) {
-    return this.petService.findOne(id);
-  }
-
-  update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
-    return this.petService.update(id, updatePetDto);
-  }
-
-  remove(@Param('id') id: string) {
-    return this.petService.remove(id);
-  }
+  // remove(@Param('id') id: { userEmail: string; petId: string }) {
+  //   return this.petAdoptionSercice.remove(id);
+  // }
 }
