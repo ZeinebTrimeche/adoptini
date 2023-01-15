@@ -12,7 +12,7 @@ export class PetService {
     private petRepo: Repository<Pet>,
   ) {}
   create(createPetDto: CreatePetDto) {
-    return this.petRepo.save(createPetDto);
+    return this.petRepo.save({ ...createPetDto, markedForAdoption: true });
   }
 
   findAll() {

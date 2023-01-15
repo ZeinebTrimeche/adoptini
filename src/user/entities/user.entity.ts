@@ -35,7 +35,6 @@ export class User {
   public birthDate: Date;
 
   @Column({ nullable: true })
-  @IsUrl()
   public pictureUrl?: string;
 
   @OneToMany(() => Pet, (pet) => pet.owner)
