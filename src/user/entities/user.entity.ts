@@ -21,13 +21,9 @@ export class User {
   @Column()
   public birthDate: Date;
 
-  @Column()
-  public pictureUrl: string;
-
-  // public ownedPets: string[];
+  @Column({ nullable: true })
+  public pictureUrl?: string;
 
   @OneToMany(() => Pet, (pet) => pet.ownerUuid)
-  public adoptedPets: Pet[];
-
-  // public roles: string;
+  public adoptedPets?: Pet[];
 }

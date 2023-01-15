@@ -4,9 +4,7 @@ import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 
 import * as bcrypt from 'bcrypt';
-
-const salt = process.env.PASSWORD_SALT;
-const hash = (password: string) => bcrypt.hash(password, salt);
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,13 +13,26 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async hash(password: string) {
+    const salt = await bcrypt.genSalt(8);
+    return bcrypt.hash(password, salt);
+  }
+
   async validateUser(email: string, password: string): Promise<User> {
     const user = await this.usersService.findByEmail(email);
     if (!user) return null;
-
     if (await bcrypt.compare(password, user.hashedPassword)) return user;
-
     return null;
+  }
+
+  async signup(user: CreateUserDto) {
+    const hashedPassword = await this.hash(user.password);
+    const newUser = await this.usersService.create({
+      ...user,
+      hashedPassword,
+    });
+    const { hashedPassword: _, ...userWithoutPassword } = newUser;
+    return userWithoutPassword;
   }
 
   async login(user: User) {
