@@ -19,7 +19,7 @@ export class AuthService {
     const user = await this.usersService.findByEmail(email);
     if (!user) return null;
 
-    if (email && user.hashedPassword === (await hash(password))) return user;
+    if (await bcrypt.compare(password, user.hashedPassword)) return user;
 
     return null;
   }
